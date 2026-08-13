@@ -43,7 +43,7 @@ pip install -r requirements.txt
 5. Run the Streamlit App
 
 ```bash
-streamlit run fraud_investigation_agent.py
+streamlit run app.py
 ```
 
 ### How it Works?

@@ -1,0 +1,72 @@
+/* core/styles.css */
+/* Hide Streamlit header and footer */
+header {visibility: hidden;}
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* Custom typography and gradient text */
+.gradient-text {
+    background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+/* Subtitle */
+.subtitle {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+/* Start Investigation Button Glowing Effect */
+div.stButton > button:first-child {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white !important;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    width: 100%;
+}
+
+div.stButton > button:first-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+}
+
+div.stButton > button:first-child:active {
+    transform: translateY(0);
+}
+
+/* Glassmorphism for inputs and containers */
+.stTextInput > div > div > input, 
+.stSelectbox > div > div > div {
+    background-color: rgba(30, 41, 59, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: #f8fafc !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stSelectbox > div > div > div:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 1px #6366f1 !important;
+}
+
+/* Dividers */
+hr {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}

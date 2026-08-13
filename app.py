@@ -9,6 +9,8 @@ Usage:
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit as st
 from agno.agent import Agent
 from agno.models.openrouter import OpenRouter
@@ -27,10 +29,21 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("🔍 AI Fraud Investigation Agent")
-st.caption(
-    "Autonomous childcare provider fraud investigation using public licensing records, "
-    "Cook County property data, Google Maps, and Claude via OpenRouter."
+def load_css():
+    css_path = Path("core/styles.css")
+    if css_path.exists():
+        with open(css_path) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css()
+
+st.markdown('<div class="gradient-text">🔍 Surelock Homes</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="subtitle">'
+    'Autonomous childcare provider fraud investigation using public licensing records, '
+    'Cook County property data, Google Maps, and Claude via OpenRouter.'
+    '</div>', 
+    unsafe_allow_html=True
 )
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────

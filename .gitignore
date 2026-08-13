@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv
+venv/
+env/
+ENV/
+
+# Streamlit specifics (DO NOT ignore config.toml as it contains our custom theme)
+.streamlit/credentials.toml
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite3
+interview_prep.md
+Fraud_Detection.pdf
+Fraud_Detection_demo.mp4
