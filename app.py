@@ -1,4 +1,4 @@
-"""AI Fraud Investigation Agent — Surelock Homes Demo
+"""AI Fraud Investigation Agent — Agent Fraud Demo
 
 Autonomous childcare provider fraud investigation using public records,
 property GIS data, Google Maps, and Claude via OpenRouter.
@@ -27,7 +27,7 @@ from tools.business import check_business_registration
 # ── Streamlit App ─────────────────────────────────────────────────────────────
 
 st.set_page_config(
-    page_title="Surelock Homes — AI Fraud Investigation Agent",
+    page_title="Agent Fraud — AI Fraud Investigation Agent",
     page_icon="🔍",
     layout="wide",
 )
@@ -85,7 +85,7 @@ def _render_report(text: str):
     st.markdown(text)
 
 
-st.markdown('<div class="gradient-text">🔍 Surelock Homes</div>', unsafe_allow_html=True)
+st.markdown('<div class="gradient-text">🔍 Agent Fraud</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="subtitle">'
     'Autonomous AI-powered childcare provider fraud investigation using public licensing records, '
@@ -151,7 +151,7 @@ with st.sidebar:
 
     st.divider()
     st.markdown(
-        "**About:** This is a demo of [Surelock Homes](https://github.com/oso95/Surelock-Homes), "
+        "**About:** This is a demo of [Agent Fraud](https://github.com/genus-lang/agent_fraud), "
         "an open-source autonomous fraud investigation system for subsidized childcare."
     )
     st.markdown(

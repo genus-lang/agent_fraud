@@ -1,8 +1,8 @@
-# 🔍 Surelock Homes: AI Fraud Investigation Agent
+# 🔍 Agent Fraud: AI Fraud Investigation Agent
 
 ![Workflow Diagram](assets/workflow_diagram.png)
 
-Surelock Homes is an advanced, autonomous AI agent designed to act as a digital forensic auditor for subsidized childcare providers. By orchestrating multiple public data sources, it investigates facilities to find discrepancies where the official licensing paperwork mathematically or visually contradicts physical reality.
+Agent Fraud is an advanced, autonomous AI agent designed to act as a digital forensic auditor for subsidized childcare providers. By orchestrating multiple public data sources, it investigates facilities to find discrepancies where the official licensing paperwork mathematically or visually contradicts physical reality.
 
 ---
 

@@ -325,7 +325,7 @@ async function processPrompt(taskId, prompt) {
             return;
         }
 
-        showToast("📡 Sending result back to Surelock...", "#6366f1");
+        showToast("📡 Sending result back to Agent Fraud...", "#6366f1");
 
         await fetch(`${PROXY_URL}/submit`, {
             method: "POST",
