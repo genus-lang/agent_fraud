@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatGPT Bridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 320px;
+      min-height: 370px;
+      font-family: 'Inter', sans-serif;
+      background: #0d0d14;
+      color: #e2e8f0;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* Background radial glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .header .emoji { font-size: 26px; }
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a78bfa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Status Cards ── */
+    .status-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+    .status-card.connected   { border-color: rgba(34,197,94,0.35); }
+    .status-card.disconnected{ border-color: rgba(239,68,68,0.35); }
+
+    .status-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .status-text { flex: 1; }
+    .status-text .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    .dot.green { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+    .dot.red   { background: #ef4444; box-shadow: 0 0 6px #ef4444; animation: none; }
+    .dot.amber { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+
+    .status-value {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .status-value.connected    { color: #4ade80; }
+    .status-value.disconnected { color: #f87171; }
+    .status-value.checking     { color: #fbbf24; }
+
+    /* ── Button ── */
+    .btn-open {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: all 0.2s;
+      background: linear-gradient(135deg, #6366f1, #22d3ee);
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .btn-open:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-open:active { transform: translateY(0); }
+    .btn-open.focus  { background: linear-gradient(135deg, #22d3ee, #22c55e); }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .stats-bar .count {
+      font-size: 14px;
+      font-weight: 700;
+      color: #a78bfa;
+    }
+
+    /* ── Activity log ── */
+    .log-box {
+      margin-top: 10px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 8px 10px;
+      max-height: 72px;
+      overflow-y: auto;
+    }
+    .log-box::-webkit-scrollbar { width: 4px; }
+    .log-box::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .log-line {
+      font-size: 10.5px;
+      color: #64748b;
+      line-height: 1.7;
+      font-family: monospace;
+    }
+    .log-line.ok   { color: #4ade80; }
+    .log-line.warn { color: #fbbf24; }
+    .log-line.info { color: #7dd3fc; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      font-size: 10px;
+      color: #334155;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span class="emoji">🤖</span>
+    <h1>ChatGPT Bridge</h1>
+  </div>
+
+  <!-- ChatGPT Tab Status -->
+  <div class="status-card" id="card-tab">
+    <div class="status-icon">🌐</div>
+    <div class="status-text">
+      <div class="label">ChatGPT Tab</div>
+      <div class="status-row">
+        <div class="dot amber" id="dot-tab"></div>
+        <span class="status-value checking" id="val-tab">Checking…</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proxy Server Status -->
+  <div class="status-card" id="card-proxy">
+    <div class="status-icon">⚙️</div>
+    <div class="status-text">
+      <div class="label">Proxy Server (port 5000)</div>
+      <div class="status-row">
+        <div class="dot amber" id="dot-proxy"></div>
+        <span class="status-value checking" id="val-proxy">Checking…</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <button class="btn-open" id="btn-open">Open ChatGPT Tab</button>
+  <button class="btn-open focus" id="btn-focus" style="display:none;">Focus ChatGPT Tab</button>
+  <button class="btn-open" id="btn-reset" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5;margin-top:6px;">🔄 Reset Stuck State</button>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    Tasks processed this session: <span class="count" id="task-count">0</span>
+  </div>
+
+  <!-- Live Log -->
+  <div class="log-box" id="log-box">
+    <div class="log-line info">[Bridge] Extension loaded.</div>
+  </div>
+
+  <footer>v1.0 &bull; Surelock Homes Bridge</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
